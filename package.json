@@ -1,5 +1,6 @@
 {
   "name": "foodies",
+  "description": "a simple shop app using nextjs",
   "version": "0.1.0",
   "private": true,
   "scripts": {
