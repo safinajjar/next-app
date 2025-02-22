@@ -3,9 +3,24 @@ import classes from "./page.module.css";
 import { getMeal } from "@/lib/meals";
 import { notFound } from "next/navigation";
 
-export default async function MealDetailsPage(props) {
-  const params = await props.params;
-  const meal = await getMeal(params.slug);
+// metadata for dynamic page
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const meal = getMeal(slug);
+
+  if (!meal) {
+    notFound();
+  }
+
+  return {
+    title: meal.title,
+    descirption: meal.summary,
+  };
+}
+
+export default async function MealDetailsPage({ params }) {
+  const { slug } = await params;
+  const meal = getMeal(slug);
 
   if (!meal) {
     notFound();
